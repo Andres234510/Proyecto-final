@@ -1,4 +1,5 @@
 package co.edu.uniquindio.javafxtestnoche.proyectofinal.model.interfaces;
 
-public class Notificable {
+public interface Notificable {
+    void recibirNotificacion(String mensaje);
 }

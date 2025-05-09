@@ -2,12 +2,12 @@ package co.edu.uniquindio.javafxtestnoche.proyectofinal.model.personas;
 import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.citas.Cita;
 import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.citas.HistorialMedico;
 import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.interfaces.GestionCitas;
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.interfaces.Notificable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Paciente extends Persona implements GestionCitas {
+public class Paciente extends Persona implements GestionCitas, Notificable {
     private String direccion;
     private List<Cita> citas;
     private HistorialMedico historial;
@@ -31,7 +31,7 @@ public class Paciente extends Persona implements GestionCitas {
         return historial;
     }
 
-    // Implementación de GestiónCitas
+    // Implementación de GestionCitas
     @Override
     public void solicitarCita(Cita cita) {
         citas.add(cita);
@@ -45,6 +45,12 @@ public class Paciente extends Persona implements GestionCitas {
     @Override
     public List<Cita> listarCitas() {
         return citas;
+    }
+
+    // Implementación de Notificable
+    @Override
+    public void recibirNotificacion(String mensaje) {
+        System.out.println("🔔 Notificación para " + getNombre() + ": " + mensaje);
     }
 
     @Override
