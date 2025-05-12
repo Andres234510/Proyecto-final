@@ -1,5 +1,6 @@
 package co.edu.uniquindio.javafxtestnoche.proyectofinal.view;
 
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.controller.LoginController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -29,6 +30,7 @@ public class LoginView extends Application {
         btnIngresar.setOnAction(e -> {
             String id = txtIdentificacion.getText();
             String tipo = tipoUsuario.getValue();
+            new LoginController().iniciarSesion(id, tipo, stage);
 
             if (id.isBlank() || tipo == null) {
                 mostrarAlerta("Campos incompletos", "Debe ingresar su identificación y tipo de usuario.");
