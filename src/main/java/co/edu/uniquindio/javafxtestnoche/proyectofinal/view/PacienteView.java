@@ -1,5 +1,7 @@
 package co.edu.uniquindio.javafxtestnoche.proyectofinal.view;
 
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.controller.PacienteController;
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.personas.Paciente;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -24,10 +26,13 @@ public class PacienteView extends Application {
         Button btnSalir = new Button("Cerrar Sesión");
 
         // Acciones (simuladas)
-        btnVerHistorial.setOnAction(e -> System.out.println("📋 Mostrando historial médico..."));
-        btnSolicitarCita.setOnAction(e -> System.out.println("📅 Solicitando nueva cita..."));
-        btnCancelarCita.setOnAction(e -> System.out.println("❌ Cancelando cita..."));
-        btnVerCitas.setOnAction(e -> System.out.println("📖 Listando citas activas..."));
+        Paciente pacienteDemo = new Paciente("001", "Carlos Ruiz", "carlos@uq.edu.co", "3130001111", "Calle 10");
+
+        PacienteController controller = new PacienteController(pacienteDemo);
+        btnVerHistorial.setOnAction(e -> controller.verHistorial());
+        btnSolicitarCita.setOnAction(e -> controller.solicitarCita("Dolor de cabeza"));
+        btnCancelarCita.setOnAction(e -> controller.cancelarUltimaCita());
+        btnVerCitas.setOnAction(e -> controller.verCitas());
         btnSalir.setOnAction(e -> stage.close());
 
         // Layout

@@ -1,5 +1,7 @@
 package co.edu.uniquindio.javafxtestnoche.proyectofinal.view;
 
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.controller.MedicoController;
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.personas.Medico;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -23,9 +25,13 @@ public class MedicoView extends Application {
         Button btnSalir = new Button("Cerrar Sesión");
 
         // Acciones simuladas
-        btnVerCitas.setOnAction(e -> System.out.println("📋 Mostrando citas asignadas..."));
-        btnVerHistorial.setOnAction(e -> System.out.println("📖 Consultando historial del paciente..."));
-        btnRegistrarDiagnostico.setOnAction(e -> System.out.println("💊 Registrando diagnóstico..."));
+        Medico medicoDemo = new Medico("M-001", "Dra. Ana Torres", "ana@uq.edu.co", "3123456789", "Pediatría");
+        MedicoController controller = new MedicoController(medicoDemo);
+
+        btnVerCitas.setOnAction(e -> controller.verCitasAsignadas());
+        btnVerHistorial.setOnAction(e -> controller.consultarHistorial(medicoDemo.getCitasAsignadas().isEmpty() ? null : medicoDemo.getCitasAsignadas().get(0).getPaciente().getHistorial()));
+        btnRegistrarDiagnostico.setOnAction(e -> controller.registrarDiagnostico(medicoDemo.getCitasAsignadas().isEmpty() ? null : medicoDemo.getCitasAsignadas().get(0).getPaciente().getHistorial(), "Gripe común", "Reposo e hidratación"));
+
         btnSalir.setOnAction(e -> stage.close());
 
         // Layout

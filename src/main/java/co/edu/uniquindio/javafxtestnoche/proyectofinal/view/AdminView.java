@@ -26,8 +26,8 @@ public class AdminView extends Application {
         Button btnSalir = new Button("Cerrar Sesión");
 
         // Acciones simuladas
-        btnRegistrarMedico.setOnAction(e -> System.out.println("➕ Registrando nuevo médico..."));
-        btnEliminarMedico.setOnAction(e -> System.out.println("🗑 Eliminando médico..."));
+        btnRegistrarMedico.setOnAction(e -> new MedicoFormView().mostrarFormulario(null));
+        btnEliminarMedico.setOnAction(e -> new MedicoTableView().mostrarTabla());
         btnRegistrarPaciente.setOnAction(e -> System.out.println("➕ Registrando nuevo paciente..."));
         btnEliminarPaciente.setOnAction(e -> System.out.println("🗑 Eliminando paciente..."));
         btnGestionSalas.setOnAction(e -> System.out.println("🏥 Gestionando salas y horarios..."));
