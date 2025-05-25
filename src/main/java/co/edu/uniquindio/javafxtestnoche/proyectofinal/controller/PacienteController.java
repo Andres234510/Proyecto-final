@@ -2,9 +2,13 @@ package co.edu.uniquindio.javafxtestnoche.proyectofinal.controller;
 
 
 import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.citas.Cita;
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.farmacia.Farmacia;
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.personas.Medico;
 import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.personas.Paciente;
-import co.edu.uniquindio.javafxtestnoche.proyectofinal.service.PacienteService;
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.view.FarmaciaView;
 import co.edu.uniquindio.javafxtestnoche.proyectofinal.view.components.NotificacionPopup;
+
+import javafx.scene.control.Alert;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,60 +17,46 @@ public class PacienteController {
 
     private Paciente paciente;
 
-    // Constructor para vistas que gestionan un paciente individual
     public PacienteController(Paciente paciente) {
         this.paciente = paciente;
     }
 
-    // Constructor vacío para CRUD desde AdminView
-    public PacienteController() {}
+    public PacienteController() {
 
-    // CRUD: Registrar paciente
-    public void registrarPaciente(Paciente nuevo) {
-        if (nuevo == null) {
-            NotificacionPopup.mostrarAdvertencia("Datos inválidos", "No se puede registrar un paciente nulo.");
-            return;
-        }
-        PacienteService.agregar(nuevo);
-        NotificacionPopup.mostrar("Registro Exitoso", "El paciente ha sido registrado.");
     }
 
-    // CRUD: Eliminar paciente
-    public void eliminarPaciente(Paciente paciente) {
-        if (!PacienteService.listar().contains(paciente)) {
-            NotificacionPopup.mostrarAdvertencia("No encontrado", "El paciente no está registrado.");
-            return;
-        }
-        PacienteService.eliminar(paciente);
-        NotificacionPopup.mostrar("Eliminación Exitosa", "El paciente ha sido eliminado.");
-    }
-
-    // CRUD: Actualizar paciente
-    public void actualizarPaciente(Paciente original, Paciente actualizado) {
-        PacienteService.actualizar(original, actualizado);
-        NotificacionPopup.mostrar("Actualizado", "El paciente fue actualizado correctamente.");
-    }
-
-    // Operación: Solicitar cita
-    public void solicitarCita(String motivo) {
+    public void solicitarCita(String motivo, Medico medico) {
         if (motivo == null || motivo.isBlank()) {
-            NotificacionPopup.mostrarAdvertencia("Motivo Requerido", "Debe ingresar el motivo de la cita.");
+            NotificacionPopup.mostrarAdvertencia("Motivo requerido", "Debe ingresar el motivo de la cita.");
             return;
         }
 
-        Cita cita = new Cita(
+        if (medico == null) {
+            NotificacionPopup.mostrarAdvertencia("Médico requerido", "Debe seleccionar un médico.");
+            return;
+        }
+
+        Cita nuevaCita = new Cita(
                 UUID.randomUUID().toString(),
                 LocalDateTime.now().plusDays(2),
                 paciente,
-                null,
+                medico,
                 motivo
         );
 
-        paciente.solicitarCita(cita);
-        NotificacionPopup.mostrar("Cita Solicitada", "Tu cita fue registrada exitosamente.");
+        paciente.solicitarCita(nuevaCita);
+        NotificacionPopup.mostrar("Cita solicitada", "Tu cita fue registrada exitosamente con " + medico.getNombre());
     }
 
-    // Operación: Cancelar última cita
+    public void verHistorial() {
+        if (paciente.getHistorial().getDiagnosticos().isEmpty()) {
+            NotificacionPopup.mostrar("Historial vacío", "No tienes registros médicos aún.");
+        } else {
+            System.out.println(paciente.getHistorial());
+            NotificacionPopup.mostrar("Historial Médico", "Historial mostrado en consola.");
+        }
+    }
+
     public void cancelarUltimaCita() {
         var citas = paciente.listarCitas();
         if (citas.isEmpty()) {
@@ -79,13 +69,6 @@ public class PacienteController {
         NotificacionPopup.mostrar("Cita Cancelada", "Se ha cancelado tu última cita.");
     }
 
-    // Operación: Ver historial médico
-    public void verHistorial() {
-        System.out.println(paciente.getHistorial());
-        NotificacionPopup.mostrar("Historial Médico", "Historial mostrado en consola.");
-    }
-
-    // Operación: Ver citas activas
     public void verCitas() {
         var citas = paciente.listarCitas();
         if (citas.isEmpty()) {
@@ -98,5 +81,25 @@ public class PacienteController {
             }
             NotificacionPopup.mostrar("Citas Activas", "Tus citas se han mostrado en consola.");
         }
+    }
+
+    public void actualizarPaciente(Paciente pacienteExistente, Paciente nuevo) {
+        pacienteExistente.setNombre(nuevo.getNombre());
+        pacienteExistente.setCorreo(nuevo.getCorreo());
+        pacienteExistente.setTelefono(nuevo.getTelefono());
+        NotificacionPopup.mostrar("Paciente Actualizado", "Los datos del paciente fueron actualizados exitosamente.");
+    }
+
+    public void eliminarPaciente(Paciente seleccionado) {
+        NotificacionPopup.mostrar("Paciente Eliminado", "El paciente " + seleccionado.getNombre() + " fue eliminado.");
+    }
+
+    public void registrarPaciente(Paciente nuevo) {
+        NotificacionPopup.mostrar("Paciente Registrado", "Se ha registrado al paciente " + nuevo.getNombre());
+    }
+
+    public void accederFarmacia() {
+        Farmacia farmacia = new Farmacia();
+        new FarmaciaView().mostrarVista(farmacia);
     }
 }

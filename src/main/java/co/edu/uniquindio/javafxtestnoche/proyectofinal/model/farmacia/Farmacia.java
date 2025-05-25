@@ -7,6 +7,7 @@ import java.util.Map;
 public class Farmacia {
     // Simulación de pedidos de medicamentos por paciente
     private Map<Paciente, String> pedidos;
+    private Medicamento[] medicamentos;
 
     public Farmacia() {
         this.pedidos = new HashMap<>();
@@ -37,5 +38,13 @@ public class Farmacia {
         } else {
             System.out.println("⚠️ No existe un pedido para cancelar.");
         }
+    }
+
+    public Medicamento[] getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(Medicamento[] medicamentos) {
+        this.medicamentos = medicamentos;
     }
 }

@@ -19,6 +19,13 @@ public class Paciente extends Persona implements GestionCitas, Notificable {
         this.historial = new HistorialMedico();
     }
 
+    public Paciente(String id, String nombre, String correo, String telefono) {
+        super(id, nombre, correo, telefono);
+        this.direccion = "";
+        this.citas = new ArrayList<>();
+        this.historial = new HistorialMedico();
+    }
+
     public String getDireccion() {
         return direccion;
     }

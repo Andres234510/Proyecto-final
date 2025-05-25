@@ -15,6 +15,10 @@ public abstract class Persona {
         this.telefono = telefono;
     }
 
+    public Persona() {
+
+    }
+
     // Getters y Setters (encapsulamiento)
     public String getId() {
         return id;

@@ -12,6 +12,9 @@ public class Cita {
     private Paciente paciente;
     private Medico medico;
     private String motivo;
+    private String tratamiento;
+    private String diagnostico;
+    private String fecha;
 
     // Constructor
     public Cita(String id, LocalDateTime fechaHora, Paciente paciente, Medico medico, String motivo) {
@@ -70,6 +73,31 @@ public class Cita {
                 "Cita ID: %s\nFecha: %s\nPaciente: %s\nMédico: %s\nMotivo: %s",
                 id, fechaHora.toString(), paciente.getNombre(), medico.getNombre(), motivo
         );
+    }
+
+
+    public String getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(String tratamiento) {
+        this.tratamiento = tratamiento;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }
 

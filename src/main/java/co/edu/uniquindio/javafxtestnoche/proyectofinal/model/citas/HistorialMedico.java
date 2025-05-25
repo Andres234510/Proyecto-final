@@ -9,6 +9,7 @@ import java.util.List;
 public class HistorialMedico {
 
     private Paciente paciente;
+    private CharSequence diagnosticos;
 
     public Paciente getPaciente() {
         return paciente;
@@ -16,6 +17,14 @@ public class HistorialMedico {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
+    }
+
+    public CharSequence getDiagnosticos() {
+        return diagnosticos;
+    }
+
+    public void setDiagnosticos(CharSequence diagnosticos) {
+        this.diagnosticos = diagnosticos;
     }
 
     // Clase interna para representar cada entrada del historial
