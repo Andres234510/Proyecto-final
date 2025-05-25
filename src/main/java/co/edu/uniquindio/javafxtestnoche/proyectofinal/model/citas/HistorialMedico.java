@@ -50,18 +50,19 @@ public class HistorialMedico {
     }
 
     // Lista de entradas del historial
-    private List<Entrada> entradas;
+    private List<String> entradas;
 
     public HistorialMedico() {
-        this.entradas = new ArrayList<>();
+        this.entradas = new ArrayList<String>();
     }
 
     // Agrega una nueva entrada al historial
     public void agregarEntrada(String diagnostico, String tratamiento) {
-        entradas.add(new Entrada(diagnostico, tratamiento));
+        String entrada = "Diagnóstico: " + diagnostico + " | Tratamiento: " + tratamiento + " | Fecha: " + LocalDateTime.now();
+        this.entradas.add(entrada);
     }
 
-    public List<Entrada> getEntradas() {
+    public List<String> getEntradas() {
         return entradas;
     }
 
@@ -69,7 +70,7 @@ public class HistorialMedico {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("=== Historial Médico ===\n");
-        for (Entrada e : entradas) {
+        for (String e : entradas) {
             sb.append(e.toString()).append("\n---\n");
         }
         return sb.toString();

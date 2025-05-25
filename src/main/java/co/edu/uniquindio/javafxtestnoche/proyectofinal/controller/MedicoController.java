@@ -48,7 +48,7 @@ public class MedicoController {
             return;
         }
 
-        medico.registrarDiagnostico(historial, diagnostico, tratamiento);
+        historial.agregarEntrada(diagnostico, tratamiento);
         NotificacionPopup.mostrar("Diagnóstico Registrado", "Se ha añadido una nueva entrada al historial médico.");
     }
 }

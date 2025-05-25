@@ -10,6 +10,14 @@ import javafx.stage.Stage;
 
 public class LoginView extends Application {
 
+    private ComboBox<String> tipoUsuario;
+    private String tipoUsuarioInicial;
+
+    public void setTipoUsuarioInicial(String tipo) {
+        this.tipoUsuarioInicial = tipo;
+    }
+
+
     @Override
     public void start(Stage stage) {
         stage.setTitle("Inicio de Sesión - Hospital UQ");
@@ -19,9 +27,13 @@ public class LoginView extends Application {
         txtIdentificacion.setPromptText("ID o correo");
 
         // Selección de tipo de usuario
-        ComboBox<String> tipoUsuario = new ComboBox<>();
+        tipoUsuario = new ComboBox<>();
         tipoUsuario.getItems().addAll("Paciente", "Médico", "Administrador");
         tipoUsuario.setPromptText("Seleccione tipo de usuario");
+
+        if (tipoUsuarioInicial != null) {
+            tipoUsuario.setValue(tipoUsuarioInicial);
+        }
 
         // Botón de inicio de sesión
         Button btnIngresar = new Button("Ingresar");
@@ -30,12 +42,13 @@ public class LoginView extends Application {
         btnIngresar.setOnAction(e -> {
             String id = txtIdentificacion.getText();
             String tipo = tipoUsuario.getValue();
-            new LoginController().iniciarSesion(id, tipo, stage);
 
             if (id.isBlank() || tipo == null) {
                 mostrarAlerta("Campos incompletos", "Debe ingresar su identificación y tipo de usuario.");
                 return;
             }
+
+            new LoginController().iniciarSesion(id, tipo, stage);
 
             System.out.println("🔓 Inicio de sesión como " + tipo + " con ID: " + id);
             // Aquí podrías redirigir a la vista correspondiente

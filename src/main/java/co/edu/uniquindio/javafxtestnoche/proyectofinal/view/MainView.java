@@ -12,28 +12,34 @@ public class MainView extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Sistema de Gestión Hospitalaria - Hospital UQ");
 
-        // Botones para cada tipo de usuario
         Button btnPaciente = new Button("Ingresar como Paciente");
         Button btnMedico = new Button("Ingresar como Médico");
         Button btnAdmin = new Button("Ingresar como Administrador");
 
-        // Acciones (en el futuro, se conectan con controladores)
-        btnPaciente.setOnAction(e -> System.out.println("🔓 Acceso como Paciente"));
-        btnMedico.setOnAction(e -> System.out.println("🔓 Acceso como Médico"));
-        btnAdmin.setOnAction(e -> System.out.println("🔓 Acceso como Administrador"));
+        btnPaciente.setOnAction(e -> abrirLoginConTipo("Paciente"));
+        btnMedico.setOnAction(e -> abrirLoginConTipo("Médico"));
+        btnAdmin.setOnAction(e -> abrirLoginConTipo("Administrador"));
 
-        // Layout
         VBox root = new VBox(15);
         root.setStyle("-fx-padding: 40; -fx-alignment: center; -fx-background-color: #f0f8ff;");
         root.getChildren().addAll(btnPaciente, btnMedico, btnAdmin);
 
-        // Escena
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    // Método principal (requerido para lanzar JavaFX)
+    private void abrirLoginConTipo(String tipo) {
+        Stage loginStage = new Stage();
+        LoginView loginView = new LoginView();
+        loginView.setTipoUsuarioInicial(tipo);
+        try {
+            loginView.start(loginStage);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
