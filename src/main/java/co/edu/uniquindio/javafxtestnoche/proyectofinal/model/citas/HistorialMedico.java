@@ -1,10 +1,22 @@
 package co.edu.uniquindio.javafxtestnoche.proyectofinal.model.citas;
 
+import co.edu.uniquindio.javafxtestnoche.proyectofinal.model.personas.Paciente;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistorialMedico {
+
+    private Paciente paciente;
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
 
     // Clase interna para representar cada entrada del historial
     public static class Entrada {

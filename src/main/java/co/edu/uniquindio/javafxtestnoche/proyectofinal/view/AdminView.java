@@ -21,15 +21,21 @@ public class AdminView extends Application {
         Button btnEliminarMedico = new Button("Eliminar Médico");
         Button btnRegistrarPaciente = new Button("Registrar Paciente");
         Button btnEliminarPaciente = new Button("Eliminar Paciente");
+        Button btnVerPacientes = new Button("Ver Pacientes");
+        Button btnGestionCitas = new Button("Gestionar Citas");
+        Button btnVerHistoriales = new Button("Historiales Médicos");
         Button btnGestionSalas = new Button("Gestionar Salas y Horarios");
         Button btnVerReporte = new Button("Ver Reporte de Citas");
         Button btnSalir = new Button("Cerrar Sesión");
 
-        // Acciones simuladas
+        // Acciones funcionales
         btnRegistrarMedico.setOnAction(e -> new MedicoFormView().mostrarFormulario(null));
         btnEliminarMedico.setOnAction(e -> new MedicoTableView().mostrarTabla());
-        btnRegistrarPaciente.setOnAction(e -> System.out.println("➕ Registrando nuevo paciente..."));
-        btnEliminarPaciente.setOnAction(e -> System.out.println("🗑 Eliminando paciente..."));
+        btnRegistrarPaciente.setOnAction(e -> new PacienteFormView().mostrarFormulario(null));
+        btnEliminarPaciente.setOnAction(e -> new PacienteTableView().mostrarTabla());
+        btnVerPacientes.setOnAction(e -> new PacienteTableView().mostrarTabla());
+        btnGestionCitas.setOnAction(e -> new CitaTableView().mostrarTabla());
+        btnVerHistoriales.setOnAction(e -> new HistorialMedicoTableView().mostrarTabla());
         btnGestionSalas.setOnAction(e -> System.out.println("🏥 Gestionando salas y horarios..."));
         btnVerReporte.setOnAction(e -> System.out.println("📊 Mostrando reporte de citas..."));
         btnSalir.setOnAction(e -> stage.close());
@@ -41,6 +47,9 @@ public class AdminView extends Application {
                 btnEliminarMedico,
                 btnRegistrarPaciente,
                 btnEliminarPaciente,
+                btnVerPacientes,
+                btnGestionCitas,
+                btnVerHistoriales,
                 btnGestionSalas,
                 btnVerReporte,
                 btnSalir
@@ -48,7 +57,7 @@ public class AdminView extends Application {
         root.setPadding(new Insets(30));
         root.setStyle("-fx-alignment: center; -fx-background-color: #fff5f5;");
 
-        Scene scene = new Scene(root, 450, 450);
+        Scene scene = new Scene(root, 500, 550);
         stage.setScene(scene);
         stage.show();
     }
