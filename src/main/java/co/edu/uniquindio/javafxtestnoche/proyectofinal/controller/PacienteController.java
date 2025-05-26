@@ -99,7 +99,8 @@ public class PacienteController {
     }
 
     public void accederFarmacia() {
-        Farmacia farmacia = new Farmacia();
+        Farmacia farmacia;
+        farmacia = new Farmacia();
         new FarmaciaView().mostrarVista(farmacia);
     }
 }

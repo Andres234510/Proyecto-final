@@ -11,6 +11,11 @@ public class Farmacia {
 
     public Farmacia() {
         this.pedidos = new HashMap<>();
+        this.medicamentos = new Medicamento[] {
+                new Medicamento("Paracetamol", "Tabletas 500mg", 50),
+                new Medicamento("Ibuprofeno", "Jarabe 100ml", 30),
+                new Medicamento("Amoxicilina", "Cápsulas 500mg", 20)
+        };
     }
 
     // Solicita un medicamento para un paciente
