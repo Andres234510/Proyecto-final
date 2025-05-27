@@ -26,4 +26,7 @@ public class MedicoService {
             medicos.set(i, actualizado);
         }
     }
+    public ArrayList<Medico> getMedicos(){
+        return new ArrayList<>(medico);
+    }
 }
