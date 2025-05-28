@@ -30,7 +30,7 @@ public class MedicoView extends Application {
         Button btnSalir = new Button("Cerrar Sesión");
 
         btnVerCitas.setOnAction(e -> controller.verCitasAsignadas());
-        btnVerHistorial.setOnAction(e-> controller.HistorialMedicoView());
+        btnVerHistorial.setOnAction(e-> controller.hashCode());
 
         btnVerHistorial.setOnAction(e -> {
             if (!medico.getCitasAsignadas().isEmpty()) {

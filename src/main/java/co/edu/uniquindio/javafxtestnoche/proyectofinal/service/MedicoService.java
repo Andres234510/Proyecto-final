@@ -7,6 +7,7 @@ import java.util.List;
 
 public class MedicoService {
     private static final List<Medico> medicos = new ArrayList<>();
+    private int medico;
 
     public static void agregar(Medico medico) {
         medicos.add(medico);
